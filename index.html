@@ -6,14 +6,45 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vite + TS</title>
     <style>
-      canvas {
-        border: 1px solid silver;
+      svg {
+        display: none;
+      }
+      #js-camera {
+        font-family: monospace;
+        position: absolute;
+        top: 0;
+        right: 1em;
+        color: green;
+        padding: 1em;
+      }
+      #scene-container {
+        /* tell our scene container to take up the full page */
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        /*width: 100%;*/
+        /*height: 100%;*/
+
+        /*
+          Set the container's background color to the same as the scene's
+          background to prevent flashing on load
+        */
+        background-color: skyblue;
       }
     </style>
   </head>
   <body>
-    <h1>Path Test</h1>
-    <canvas id="js-canvas" width="640" height="400"></canvas>
+    <div id="scene-container"></div>
+    <p id="js-camera">FrameRate</p>
+    <div>
+      <svg width="100%" height="100%" viewBox="0 0 200 300" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.5;">
+          <g transform="matrix(1,0,0,1,50,100)">
+              <path d="M50,-100C13.183,-55.26 107.862,0.29 105.966,50C103.968,102.39 7.47,149.046 50,200" style="fill:none;stroke:black;stroke-width:1px;"/>
+          </g>
+      </svg>
+    </div>
     <script type="module" src="/src/main.ts"></script>
   </body>
 </html>
