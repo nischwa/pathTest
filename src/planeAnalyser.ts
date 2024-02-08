@@ -1,10 +1,8 @@
 import {
     BufferGeometry,
-    Group,
     Line,
     LineBasicMaterial,
     Mesh,
-    MeshStandardMaterial, Object3DEventMap,
     PlaneGeometry,
     Vector3
 } from "three";
@@ -18,7 +16,6 @@ export class PlaneAnalyser {
     constructor(plane: Mesh<PlaneGeometry>) {
         this.plane = plane;
         this.path = pathFromSVG().children[0] as Mesh;
-        console.log(this.path.geometry.getAttribute('position'))
         this.analyse();
     }
 
