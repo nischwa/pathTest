@@ -15,7 +15,6 @@ function createSimplePlane() {
   const textureLoader = new TextureLoader();
   const heightMap = textureLoader.load('public/pathtest2.jpg');
   const geometry = new PlaneGeometry(width, height, 32, 32);
-  console.log(heightMap);
   let material = new MeshPhysicalMaterial({
     wireframe: true,
     fog: true,
@@ -34,7 +33,7 @@ function createSimplePlane() {
   (plane as any).tick = (delta: number) => {
     // plane.rotation.z += delta * MathUtils.degToRad(15);
   }
-  return {plane, material};
+  return {plane, planeDimensions: {width, height}};
 }
 
 export { createSimplePlane };

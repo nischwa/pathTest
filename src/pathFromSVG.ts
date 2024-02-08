@@ -7,9 +7,17 @@ const viewBox = svg.getAttribute('viewBox')?.split(' ');
 const width = Number(viewBox![2]);
 const height = Number(viewBox![3]);
 console.log({width, height});
-export function pathFromSVG() {
+
+export interface SvgPathInfo {
+    geometries: ShapeGeometry[],
+    dimensions: {
+        width: number,
+        height: number
+    }
+}
+
+export function pathFromSVG(): SvgPathInfo {
     const geometries: ShapeGeometry[] = [];
-    const normalizedVertices: Vector3[] = []
 
     const loader = new SVGLoader();
     const data = loader.parse(svg.outerHTML);
@@ -19,16 +27,11 @@ export function pathFromSVG() {
         // @ts-ignore
         shapes.forEach(shape => {
             const geometry = new ShapeGeometry( shape );
-            console.log('geometry', geometry);
             geometries.push(geometry);
         })
     })
 
     const pos = geometries[0].getAttribute('position');
 
-    // console.log(normalizedVertices);
-
-    console.log(geometries);
-
-    return geometries;
+    return {geometries, dimensions: {width, height}};
 }

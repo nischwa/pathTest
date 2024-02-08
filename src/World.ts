@@ -33,10 +33,10 @@ export class World {
     // // Camera Path
     // const path = createPath();
 
-    const {plane} = createSimplePlane();
+    const {plane, planeDimensions} = createSimplePlane();
 
     // Analysis of plane properties
-    const planeAnalyser = new PlaneAnalyser(plane);
+    const planeAnalyser = new PlaneAnalyser(plane, planeDimensions);
 
     this.loop.updatables.push(plane);
 
