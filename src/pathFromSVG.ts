@@ -3,6 +3,7 @@ import {SVGLoader} from "three/examples/jsm/loaders/SVGLoader";
 import { ShapeGeometry, Vector3} from "three";
 
 const svg = document.querySelector('svg')!;
+// const svg = document.querySelector('#js-straight')!;
 const viewBox = svg.getAttribute('viewBox')?.split(' ');
 const width = Number(viewBox![2]);
 const height = Number(viewBox![3]);

@@ -6,22 +6,22 @@ import {
   TextureLoader,
 } from "three";
 
-const dsHeight = -2.5;
+const dsHeight = -50;
 
 function createSimplePlane() {
   // create a geometry
-  const width = 20;
-  const height = 30;
+  const width = 200;
+  const height = 1080;
   const textureLoader = new TextureLoader();
-  const heightMap = textureLoader.load('public/pathtest2.jpg');
-  const geometry = new PlaneGeometry(width, height, 32, 32);
+  const heightMap = textureLoader.load('public/loang-canyon_b.jpg');
+  const geometry = new PlaneGeometry(width, height, 128, 128);
   let material = new MeshPhysicalMaterial({
     wireframe: true,
     fog: true,
     color: new Color('green'),
     displacementMap: heightMap,
     displacementScale: -dsHeight,
-    displacementBias: 2,
+    displacementBias: -dsHeight / 2,
     flatShading: false,
   });
 
