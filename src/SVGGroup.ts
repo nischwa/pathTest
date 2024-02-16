@@ -1,12 +1,14 @@
 import {SVGLoader} from "three/examples/jsm/loaders/SVGLoader";
-import {ShapeGeometry, Vector3} from "three";
+import {DoubleSide, Group, MathUtils, Mesh, MeshBasicMaterial, ShapeGeometry, Vector3} from "three";
 
-export class SVGPath {
+export class SVGGroup {
     private svg: HTMLElement;
     private width: number;
     private height: number;
     private geometry: ShapeGeometry;
     private points: Vector3[] = [];
+    private material: MeshBasicMaterial;
+    private group: Group;
 
     constructor(svgSelector: string) {
         console.log('- - - - - -');
@@ -16,7 +18,15 @@ export class SVGPath {
         this.width = Number(viewBox![2]);
         this.height = Number(viewBox![3]);
         console.log(this.width, this.height);
+        this.material = new MeshBasicMaterial({side: DoubleSide, color: 'orange', wireframe: false})
+        this.group = new Group();
+        this.group.rotateX(MathUtils.degToRad(180));
+        this.svgGroup.position.set(-0.5 * this.width, this.height, 0);
         this.parseSvg();
+    }
+
+    public tick(delta) {
+        // this.group.rotation.y += delta * 0.5;
     }
 
     public get vectors(): Vector3[] {
@@ -35,12 +45,18 @@ export class SVGPath {
             // @ts-ignore
             shapes.forEach(shape => {
                 const geometry = new ShapeGeometry( shape );
-                geos.push(geometry);
+                const mesh = new Mesh(geometry, this.material);
+                this.group.add(mesh);
             })
         })
-        console.log('Geometries Created', geos.length);
-        this.geometry = geos[0];
-        this.createVectors();
+        console.log('Geometries Created', this.group.children.length);
+        // this.geometry = geos[0];
+        // this.createVectors();
+    }
+
+    public get svgGroup(): Group {
+        this.group.position.y = 150;
+        return this.group;
     }
 
     private createVectors() {

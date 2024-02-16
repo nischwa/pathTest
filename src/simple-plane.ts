@@ -13,16 +13,17 @@ function createSimplePlane() {
   const width = 200;
   const height = 1080;
   const textureLoader = new TextureLoader();
-  const heightMap = textureLoader.load('public/loang-canyon_b.jpg');
-  const geometry = new PlaneGeometry(width, height, 128, 128);
+  const heightMap = textureLoader.load('public/withgap.jpg');
+  const geometry = new PlaneGeometry(width, height, 64, 64);
+  const wireframe = false;
   let material = new MeshPhysicalMaterial({
-    wireframe: true,
+    wireframe: wireframe,
     fog: true,
     color: new Color('green'),
     displacementMap: heightMap,
     displacementScale: -dsHeight,
     displacementBias: -dsHeight / 2,
-    flatShading: false,
+    flatShading: !wireframe,
   });
 
 

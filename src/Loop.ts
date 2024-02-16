@@ -37,8 +37,8 @@ class Loop {
     const delta = this.clock.getDelta();
     const time = this.clock.getElapsedTime();
     // console.log(time);
-    const {x, y, z} = this.camera.position;
-    cam.innerHTML = `Cam: x: ${x}, y: ${y}, z: ${z}`;
+    // const {x, y, z} = this.camera.position;
+    // cam.innerHTML = `Cam: x: ${x}, y: ${y}, z: ${z}`;
     for (const obj of this.updatables) {
       obj.tick(delta, this.camera, time, this.watchObjects);
     }
